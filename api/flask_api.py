@@ -32,5 +32,9 @@ def login():
 
     return jsonify(table)
 
+@app.route('/predict')
+def predict():
+    return ""
+
 if __name__ == '__main__':
     app.run(debug=True)

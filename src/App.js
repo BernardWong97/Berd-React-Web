@@ -1,37 +1,27 @@
 import React, {useState} from 'react'
 import './App.css';
-import 'bootstrap/dist/css/bootstrap.min.css'
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import {AppContext} from './libs/contextLib'
+import {BrowserRouter as Router, Switch, Route, Redirect} from 'react-router-dom'
+import Navbar from 'react-bootstrap/Navbar'
 
-import Dashboard from './components/Dashboard/Dashboard'
-import Preferences from './components/Preferences/Preferences'
-import NotFound from './components/Pages/NotFound'
-import Login from './components/Pages/Login';
+import NotFound from './Pages/NotFound'
+import Login from './Pages/Login';
+import Sidebar from './components/Sidebar';
+import Dashboard from './Pages/Dashboard';
 
 function App() {
   const [isAuthenticated, userHasAuthenticated] = useState(false)
 
   return (
     <div className="App">
-      <h1>Application</h1>
-      
-      <BrowserRouter>
+      <Router>
+        <Sidebar />
         <Switch>
-          <Route path="/login">
-            <Login/>
-          </Route>
-          <Route path="/dashboard">
-            <Dashboard/>
-          </Route>
-          <Route path="/preferences">
-            <Preferences/>
-          </Route>
-          <Route path=''>
-            <NotFound/>
-          </Route>
+          <Route path='/404' component={NotFound}/>
+          <Route path='/dashboard' exact component={Dashboard}/>
+          <Redirect to="/404"/>
         </Switch>
-      </BrowserRouter>
+      </Router>
     </div>
   );
 }

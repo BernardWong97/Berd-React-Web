@@ -33,7 +33,7 @@ export default function Login() {
                     <Form.Control autoFocus type="text" value={username} onChange={e => setUserName(e.target.value)}/>
                 </Form.Group>
                 <Form.Group size="lg" controlId="password">
-                    <Form.Label>Username</Form.Label>
+                    <Form.Label>Password</Form.Label>
                     <Form.Control type="password" value={password} onChange={e => setPassword(e.target.value)}/>
                 </Form.Group>
                 <Form.Group size="lg" controlId="username">
