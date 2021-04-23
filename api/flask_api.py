@@ -1,9 +1,13 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
+from flask_cors import CORS, cross_origin
 from flaskext.mysql import MySQL
+import hashlib
 
 app = Flask(__name__)
+CORS(app)
 mysql = MySQL()
 
+app.secret_key = "Berd"
 app.config['MYSQL_DATABASE_HOST'] = 'localhost'
 app.config['MYSQL_DATABASE_USER'] = 'root'
 app.config['MYSQL_DATABASE_PASSWORD'] = 'root'
@@ -11,10 +15,13 @@ app.config['MYSQL_DATABASE_DB'] = 'examples'
 mysql.init_app(app)
 con = mysql.connect()
 
-@app.route('/login')
+@app.route('/login', methods=['GET', 'POST'])
+@cross_origin()
 def login():
+    username = request.json["username"]
+    password = hashlib.md5(str(request.json["password"]).encode()).hexdigest()
     cur = con.cursor()
-    cur.execute("select * from users")
+    cur.execute(f"select * from users where user_name = '{username}' and password = '{password}'")
     con.commit()
     table = []
     
@@ -31,10 +38,6 @@ def login():
         table.append(row)
 
     return jsonify(table)
-
-@app.route('/predict')
-def predict():
-    return ""
 
 if __name__ == '__main__':
     app.run(debug=True)

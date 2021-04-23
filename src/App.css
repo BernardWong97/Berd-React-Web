@@ -1,5 +1,20 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
 
+:root {
+  --color1: #ffff3f;
+  --color2: #eeef20;
+  --color3: #dddf00;
+  --color4: #d4d700;
+  --color5: #bfd200;
+  --color6: #aacc00;
+  --color7: #80b918;
+  --color8: #55a630;
+  --color9: #2b9348;
+  --color10: #007f5f;
+  --colorBg1: rgba(255, 255, 63, 0.5);
+  --colorBg2: rgba(0, 127, 95, 0.5);
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -17,6 +32,13 @@
 
 .App {
   text-align: center;
+  color: white;
+  height: 100vh;
+  background-image: url("./images/forest.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-color: #cccccc;
 }
 
 .App-logo {
@@ -38,7 +60,7 @@
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: rgb(168, 158, 158);
 }
 
 .App-link {
@@ -52,4 +74,44 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.Sidebar{
+  position: fixed;
+  width: 100vw;
+  z-index: 1000;
+  top: 0;
+}
+
+.Routes{
+  margin-top: 50px;
+}
+
+.Login{
+  width: 50%;
+  position: fixed;
+  top: 15%;
+  left: 25%;
+}
+
+#potoo_ct{
+  margin: 10px;
+  border: 2px solid black;
+  border-radius: 50%;
+}
+
+#login_form{
+  padding: 60px;
+  border-radius: 50px;
+  z-index: 1;
+  text-align: center;
+  background-image: linear-gradient(var(--colorBg2), var(--colorBg1));
+}
+
+.form_control{
+  text-align: center;
+}
+
+body{
+  overflow: hidden;
 }
