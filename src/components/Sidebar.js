@@ -9,11 +9,36 @@ import {SidebarData} from './SidebarData'
 import Navbar from 'react-bootstrap/Navbar'
 
 import berd_photo from '../images/Berd.png'
+import Button from 'react-bootstrap/Button'
 
-function Sidebar() {
+const IP = "192.168.0.168"
+
+async function logoutUser(){
+    return fetch(`http://${IP}:5000/logout`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin':'*'
+        }
+    }).then(data => data.json())
+    .catch(e => {
+        console.log(e)
+    })
+}
+
+function Sidebar({setToken}) {
     const [sidebar, setSideBar] = useState(false)
     const showSidebar = () => setSideBar(!sidebar)
     const hideSidebar = () => {if(sidebar)setSideBar(false)}
+
+    const handleClick = async e => {
+        e.preventDefault()
+
+        const token = await logoutUser()
+        setToken(token)
+        window.localStorage.removeItem('user')
+        window.location.reload()
+    }
 
     return (
         <div className="Sidebar" onClick={hideSidebar}>
@@ -42,6 +67,11 @@ function Sidebar() {
                             </li>
                         )
                     })}
+                    <li className="nav-footer">
+                        <Button variant="secondary" block size="lg" onClick={handleClick}>
+                            Logout
+                        </Button>
+                    </li>
                 </ul>
             </nav>
         </div>

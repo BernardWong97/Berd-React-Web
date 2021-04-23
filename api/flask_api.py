@@ -28,12 +28,32 @@ def login():
     account = cur.fetchone()
 
     if account:
+        user = {
+            'id': account[0],
+            'name': account[1] + " " + account[2],
+            'username': account[3],
+            'online': account[7]
+        }
+        jsonObj = jsonify(
+            status = "YES",
+            user = user
+        )
         session["id"] = account[0]
         session["name"] = account[1] + " " + account[2]
         session["username"] = account[3]
         session["online"] = account[7]
-        return jsonify(status="YES")
+
+        return jsonObj
             
+    return jsonify(status="NO")
+
+@app.route('/logout', methods=['GET', 'POST'])
+@cross_origin()
+def logout():
+    session.pop("id", None)
+    session.pop("name", None)
+    session.pop("username", None)
+    session.pop("online", None)
     return jsonify(status="NO")
 
 if __name__ == '__main__':

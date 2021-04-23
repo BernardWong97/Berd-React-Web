@@ -94,7 +94,7 @@
   left: 25%;
 }
 
-.container{
+.Container{
   padding: 15%;
   height: 100vh;
   background-image: linear-gradient(var(--colorBg2), var(--colorBg1));
@@ -116,7 +116,7 @@
 }
 
 #form_title{
-  color: var(--color5);
+  color: blue;
 }
 
 #errorMsg{

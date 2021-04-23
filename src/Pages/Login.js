@@ -44,10 +44,10 @@ export default function Login({setToken}) {
             password
         })
         setToken(token)
+        window.localStorage.setItem('user', JSON.stringify(token["user"]))
 
         if(token["status"] === "NO")
             setBadLogin(true)
-
     }
 
     return (

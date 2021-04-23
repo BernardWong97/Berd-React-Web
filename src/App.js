@@ -12,6 +12,9 @@ function App() {
   const [isAuthenticated, userHasAuthenticated] = useState(false)
 
   useEffect(() => {
+    if(JSON.parse(window.localStorage.getItem('user')))
+      userHasAuthenticated(true)
+
     if(token)
       if(token["status"] === "YES")
         userHasAuthenticated(true)
@@ -28,11 +31,11 @@ function App() {
   return (
     <div className="App">
       <Router>
-        <Sidebar/>
+        <Sidebar setToken={setToken}/>
         <div className="Routes">
           <Switch>
             <Route path='/404' component={NotFound}/>
-            <Route path='/dashboard' exact component={Dashboard}/>
+            <Route path='/' exact component={Dashboard}/>
             <Redirect to="/404"/>
           </Switch>
         </div>
