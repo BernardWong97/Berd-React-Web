@@ -12,8 +12,9 @@ function App() {
   const [isAuthenticated, userHasAuthenticated] = useState(false)
 
   useEffect(() => {
-    if(JSON.parse(window.localStorage.getItem('user')))
-      userHasAuthenticated(true)
+    if(window.localStorage.getItem('user') !== null)
+      if(window.localStorage.getItem('user') !== "undefined")
+        userHasAuthenticated(true)
 
     if(token)
       if(token["status"] === "YES")
