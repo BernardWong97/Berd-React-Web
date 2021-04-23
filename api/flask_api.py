@@ -1,17 +1,18 @@
-from flask import Flask, jsonify, request
+from flask import Flask, json, jsonify, request, session
 from flask_cors import CORS, cross_origin
 from flaskext.mysql import MySQL
 import hashlib
+import os
 
 app = Flask(__name__)
 CORS(app)
 mysql = MySQL()
 
 app.secret_key = "Berd"
-app.config['MYSQL_DATABASE_HOST'] = 'localhost'
-app.config['MYSQL_DATABASE_USER'] = 'root'
-app.config['MYSQL_DATABASE_PASSWORD'] = 'root'
-app.config['MYSQL_DATABASE_DB'] = 'examples'
+app.config['MYSQL_DATABASE_HOST'] = os.environ.get("DB_HOST")
+app.config['MYSQL_DATABASE_USER'] = os.environ.get("DB_USER")
+app.config['MYSQL_DATABASE_PASSWORD'] = os.environ.get("DB_PW")
+app.config['MYSQL_DATABASE_DB'] = os.environ.get("DB_DB")
 mysql.init_app(app)
 con = mysql.connect()
 
@@ -23,21 +24,17 @@ def login():
     cur = con.cursor()
     cur.execute(f"select * from users where user_name = '{username}' and password = '{password}'")
     con.commit()
-    table = []
-    
-    for id, fname, lname, uname, pw, created_date, modified_date, is_online in cur.fetchall():
-        row = dict()
-        row['id'] = id
-        row['first_name'] = fname
-        row['last_name'] = lname
-        row['user_name'] = uname
-        row['password'] = pw
-        row['create_date'] = created_date
-        row['modified_date'] = modified_date
-        row['is_online'] = is_online
-        table.append(row)
 
-    return jsonify(table)
+    account = cur.fetchone()
+
+    if account:
+        session["id"] = account[0]
+        session["name"] = account[1] + " " + account[2]
+        session["username"] = account[3]
+        session["online"] = account[7]
+        return jsonify(status="YES")
+            
+    return jsonify(status="NO")
 
 if __name__ == '__main__':
     app.run(debug=True)

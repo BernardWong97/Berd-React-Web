@@ -12,10 +12,12 @@ function App() {
   const [isAuthenticated, userHasAuthenticated] = useState(false)
 
   useEffect(() => {
-    console.log(token)
+    if(token)
+      if(token["status"] === "YES")
+        userHasAuthenticated(true)
   }, [token])
 
-  if(!token){
+  if(!isAuthenticated){
     return(
       <div className="App">
         <Login setToken={setToken}/>

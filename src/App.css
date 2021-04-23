@@ -34,11 +34,11 @@
   text-align: center;
   color: white;
   height: 100vh;
-  background-image: url("./images/forest.png");
+  background-image: url("./images/forest.png"), linear-gradient(var(--color1), var(--color10));
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  background-color: #cccccc;
+  overflow: hidden;
 }
 
 .App-logo {
@@ -94,6 +94,13 @@
   left: 25%;
 }
 
+.container{
+  padding: 15%;
+  height: 100vh;
+  background-image: linear-gradient(var(--colorBg2), var(--colorBg1));
+  overflow: auto;
+}
+
 #potoo_ct{
   margin: 10px;
   border: 2px solid black;
@@ -101,17 +108,23 @@
 }
 
 #login_form{
-  padding: 60px;
+  padding: 40px;
   border-radius: 50px;
   z-index: 1;
   text-align: center;
   background-image: linear-gradient(var(--colorBg2), var(--colorBg1));
 }
 
-.form_control{
-  text-align: center;
+#form_title{
+  color: var(--color5);
 }
 
-body{
-  overflow: hidden;
+#errorMsg{
+  color: red;
+  font-size: larger;
+  font-weight: bolder;
+}
+
+.form_control{
+  text-align: center;
 }
