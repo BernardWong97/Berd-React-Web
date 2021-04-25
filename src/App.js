@@ -13,13 +13,8 @@ function App() {
 
   useEffect(() => {
     if(window.localStorage.getItem('user') !== null)
-<<<<<<< HEAD
-	  if(window.localStorage.getItem('user') !== 'undefined')
-      		userHasAuthenticated(true)
-=======
-      if(window.localStorage.getItem('user') !== "undefined")
-        userHasAuthenticated(true)
->>>>>>> 4e98ffd4bde222404ce40a07d4c9704fe94a82b6
+      if(window.localStorage.getItem('user') !== 'undefined')
+            userHasAuthenticated(true)
 
     if(token)
       if(token["status"] === "YES")
