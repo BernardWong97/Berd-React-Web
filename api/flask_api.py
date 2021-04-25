@@ -14,7 +14,6 @@ app.config['MYSQL_DATABASE_USER'] = os.environ.get("DB_USER")
 app.config['MYSQL_DATABASE_PASSWORD'] = os.environ.get("DB_PW")
 app.config['MYSQL_DATABASE_DB'] = os.environ.get("DB_DB")
 mysql.init_app(app)
-con = mysql.connect()
 
 @app.route('/login', methods=['GET', 'POST'])
 @cross_origin()
@@ -23,6 +22,7 @@ def login():
     password = hashlib.md5(str(request.json["password"]).encode()).hexdigest()
 
     try:
+        con = mysql.connect()
         cur = con.cursor()
         cur.execute(f"select * from users where user_name = '{username}' and password = '{password}'")
         con.commit()
