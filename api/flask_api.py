@@ -21,29 +21,35 @@ con = mysql.connect()
 def login():
     username = request.json["username"]
     password = hashlib.md5(str(request.json["password"]).encode()).hexdigest()
-    cur = con.cursor()
-    cur.execute(f"select * from users where user_name = '{username}' and password = '{password}'")
-    con.commit()
 
-    account = cur.fetchone()
+    try:
+        cur = con.cursor()
+        cur.execute(f"select * from users where user_name = '{username}' and password = '{password}'")
+        con.commit()
 
-    if account:
-        user = {
-            'id': account[0],
-            'name': account[1] + " " + account[2],
-            'username': account[3],
-            'online': account[7]
-        }
-        jsonObj = jsonify(
-            status = "YES",
-            user = user
-        )
-        session["id"] = account[0]
-        session["name"] = account[1] + " " + account[2]
-        session["username"] = account[3]
-        session["online"] = account[7]
+        account = cur.fetchone()
 
-        return jsonObj
+        if account:
+            user = {
+                'id': account[0],
+                'name': account[1] + " " + account[2],
+                'username': account[3],
+                'online': account[7]
+            }
+            jsonObj = jsonify(
+                status = "YES",
+                user = user
+            )
+            session["id"] = account[0]
+            session["name"] = account[1] + " " + account[2]
+            session["username"] = account[3]
+            session["online"] = account[7]
+
+            return jsonObj
+    except:
+        return jsonify(status="NO")
+    finally:
+        con.close()
             
     return jsonify(status="NO")
 
