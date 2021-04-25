@@ -7,7 +7,7 @@ import {zoomIn, shake} from 'react-animations'
 import styled, { keyframes } from 'styled-components'
 import {ErrorDiv} from '../components/ErrorDiv'
 
-const IP = "192.168.0.168"
+const IP = "berd.ddns.net"
 const zoomInAnim = keyframes`${zoomIn}`
 const shakeAnim = keyframes`${shake}`
 const ZoomDiv = styled.div`animation: 1s ${zoomInAnim}`

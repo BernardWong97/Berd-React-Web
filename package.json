@@ -8,6 +8,7 @@
     "@testing-library/react": "^11.2.5",
     "@testing-library/user-event": "^12.7.3",
     "bootstrap": "^4.6.0",
+    "g": "^2.0.1",
     "react": "^17.0.1",
     "react-animations": "^1.0.0",
     "react-bootstrap": "^1.5.0",
@@ -15,6 +16,7 @@
     "react-icons": "^4.2.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
+    "serve": "^11.3.2",
     "styled-components": "^5.2.3",
     "web-vitals": "^1.1.0"
   },
@@ -44,5 +46,6 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://127.0.0.1:5000"
+  "proxy": "http://127.0.0.1:5000",
+  "homepage": "http://berd.ddns.net"
 }

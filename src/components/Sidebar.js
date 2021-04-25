@@ -11,7 +11,7 @@ import Navbar from 'react-bootstrap/Navbar'
 import berd_photo from '../images/Berd.png'
 import Button from 'react-bootstrap/Button'
 
-const IP = "192.168.0.168"
+const IP = "berd.ddns.net"
 
 async function logoutUser(){
     return fetch(`http://${IP}:5000/logout`, {
