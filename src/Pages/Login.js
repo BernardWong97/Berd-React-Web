@@ -36,18 +36,32 @@ export default function Login({setToken}) {
         return username.length > 0 && password.length > 0
     }
 
+    function validateInputs(){
+        const format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
+
+        if(format.test(username)){
+            setBadLogin(true)
+            return false
+        }
+         
+        return true
+    }
+
     const handleSubmit = async e => {
         e.preventDefault()
 
-        const token = await loginUser({
-            username,
-            password
-        })
-        setToken(token)
-        window.localStorage.setItem('user', JSON.stringify(token["user"]))
-
-        if(token["status"] === "NO")
-            setBadLogin(true)
+        if(validateInputs()){
+            const token = await loginUser({
+                username,
+                password
+            })
+    
+            setToken(token)
+            window.localStorage.setItem('user', JSON.stringify(token["user"]))
+    
+            if(token["status"] === "NO")
+                setBadLogin(true)
+        }
     }
 
     return (
