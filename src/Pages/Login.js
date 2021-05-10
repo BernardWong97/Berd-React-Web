@@ -8,13 +8,14 @@ import styled, { keyframes } from 'styled-components'
 import {ErrorDiv} from '../components/ErrorDiv'
 
 const IP = process.env.REACT_APP_IP
+const API_PORT = process.env.REACT_API_PORT
 const zoomInAnim = keyframes`${zoomIn}`
 const shakeAnim = keyframes`${shake}`
 const ZoomDiv = styled.div`animation: 1s ${zoomInAnim}`
 const ShakeDiv = styled.div`animation: 0.25s ${shakeAnim}`
 
 async function loginUser(credentials){
-    return fetch(`http://${IP}:5000/login`, {
+    return fetch(`http://${IP}:${API_PORT}/login`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

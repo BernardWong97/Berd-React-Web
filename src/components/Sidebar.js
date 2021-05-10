@@ -12,9 +12,10 @@ import berd_photo from '../images/Berd.png'
 import Button from 'react-bootstrap/Button'
 
 const IP = process.env.REACT_APP_IP
+const API_IP = process.env.REACT_API_PORT
 
 async function logoutUser(){
-    return fetch(`http://${IP}:5000/logout`, {
+    return fetch(`http://${IP}:${API_IP}/logout`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
