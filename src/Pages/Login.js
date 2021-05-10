@@ -8,7 +8,7 @@ import styled, { keyframes } from 'styled-components'
 import {ErrorDiv} from '../components/ErrorDiv'
 
 const IP = process.env.REACT_APP_IP
-const API_PORT = process.env.REACT_API_PORT
+const API_PORT = process.env.REACT_APP_API_PORT
 const zoomInAnim = keyframes`${zoomIn}`
 const shakeAnim = keyframes`${shake}`
 const ZoomDiv = styled.div`animation: 1s ${zoomInAnim}`
